@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import OAuth from "../component/OAuth";
 
 function SignUp() {
   const [formData, setFormData] = useState({});
@@ -18,8 +19,8 @@ function SignUp() {
   
 
   const handleSubmit = async (event) => {
+    event.preventDefault();      // to avoid the refresh of the page when form is submitted
     try {
-      event.preventDefault();      // to avoid the refresh of the page when form is submitted
       setLoading(true);
       const res = await fetch('/api/auth/signup', {
         method: "POST",
@@ -59,6 +60,7 @@ function SignUp() {
         rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>
           {loading ? "Loading..." : "Sign Up"}
         </button>
+        <OAuth />
       </form>
 
       <div className='flex gap-2 mt-5'>
