@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   updateUserFailure,
   updateUserStart,
@@ -19,12 +20,12 @@ function Profile() {
 
   // formData to keep track of changes in the form while updating
   const [formData, setFormData] = useState({});
-  const [updateSuccess,setupdateSuccess] = useState(false)
+  const [updateSuccess, setupdateSuccess] = useState(false)
 
   const dispatch = useDispatch();
 
   // console.log(formData);
-  
+
   // ...file upload function 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.id]: event.target.value });
@@ -39,7 +40,7 @@ function Profile() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-        }, 
+        },
         body: JSON.stringify(formData),
       });
 
@@ -94,7 +95,7 @@ function Profile() {
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <input
+        <input
           onChange={(e) => setFile(e.target.files[0])}
           type="file"
           ref={fileRef}
@@ -140,6 +141,10 @@ function Profile() {
         >
           {loading ? "Loading..." : "update"}
         </button>
+        <Link to={'/create-listing'}
+          className=" bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95">
+          Create Listing
+        </Link>
       </form>
       <div className="flex justify-between mt-5">
         <span onClick={handleDeleteUser} className="text-red-700 cursor-pointer hover:opacity-85">Delete account</span>
