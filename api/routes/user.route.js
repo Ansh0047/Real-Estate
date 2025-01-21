@@ -1,5 +1,6 @@
 import express from "express";
-import { test } from "../controllers/user.controller.js";
+import { test, updateUser } from "../controllers/user.controller.js";
+import { verifyToken } from "../utils/verifyUser.js";
 const router = express.Router();
 
 
@@ -10,7 +11,10 @@ const router = express.Router();
 //     });
 // });
 
-// this test is actually a function conataining the logic for the req and res and it is imported from the user controller
+// this test is actually a function containing the logic for the req and res and it is imported from the user controller
 router.get('/test',test);
+
+// if the user if valid and it is verified using the token then it will be updtaed
+router.post('/update/:id',verifyToken, updateUser);
 
 export default router;
