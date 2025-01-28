@@ -97,7 +97,7 @@ const CreateListing = () => {
 
   // to change the values when user inputs something
   const handleChange = (event) => {
-    if (event.target.id === 'sent' || event.target.id === 'rent') {
+    if (event.target.id === 'sale' || event.target.id === 'rent') {
       setFormData({
         ...formData,
         type: event.target.id

@@ -20,7 +20,6 @@ function Profile() {
 
   // formData to keep track of changes in the form while updating
   const [formData, setFormData] = useState({});
-  const [updateSuccess, setupdateSuccess] = useState(false)
   const [showListingsError, setShowListingsError] = useState(false);
   const [userListings, setUserListings] = useState([]);
   const dispatch = useDispatch();
@@ -52,7 +51,7 @@ function Profile() {
       }
 
       dispatch(updateUserSuccess(data));
-      setupdateSuccess(true);
+      alert("User updated successfully!");
     } catch (error) {
       dispatch(updateUserFailure(error.message));
     }
@@ -189,7 +188,8 @@ function Profile() {
       </div>
 
       <p className="text-red-700 mt-5">{error ? error : ""}</p>
-      <p className="text-green-700 mt-5">{updateSuccess ? "User updated successfully!" : ""}</p>
+      {/* <p className="text-green-700 mt-5">{updateSuccess ? "User updated successfully!" : ""}</p> */}
+      {/* {alert("User updated successfully!")} */}
       <button onClick={handleShowListings} className='text-green-700 w-full'>
         Show Listings
       </button>
