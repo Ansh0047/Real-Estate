@@ -21,7 +21,7 @@ function Profile() {
   // formData to keep track of changes in the form while updating
   const [formData, setFormData] = useState({});
   const [updateSuccess, setupdateSuccess] = useState(false)
-  const [showListingsError,setShowListingsError] = useState(false);
+  const [showListingsError, setShowListingsError] = useState(false);
   const [userListings, setUserListings] = useState([]);
   const dispatch = useDispatch();
 
@@ -104,6 +104,25 @@ function Profile() {
       setUserListings(data);
     } catch (error) {
       setShowListingsError(true);
+    }
+  };
+
+  const handleListingDelete = async (listingId) => {
+    try {
+      const res = await fetch(`/api/listing/delete/${listingId}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        console.log(data.message);
+        return;
+      }
+
+      setUserListings((prev) =>
+        prev.filter((listing) => listing._id !== listingId)
+      );
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
