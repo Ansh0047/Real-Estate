@@ -94,7 +94,7 @@ function Profile() {
   const handleShowListings = async () => {
     try {
       setShowListingsError(false);
-      const res = await fetch(`/api/user/listings/${currentUser._id}`);
+      const res = await fetch(`/api/user/listing/${currentUser._id}`);
       const data = await res.json();
       if (data.success === false) {
         setShowListingsError(true);
@@ -121,6 +121,7 @@ function Profile() {
       setUserListings((prev) =>
         prev.filter((listing) => listing._id !== listingId)
       );
+      alert("List Deleted Succesfully");
     } catch (error) {
       console.log(error.message);
     }

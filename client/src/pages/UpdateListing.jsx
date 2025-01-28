@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const CreateListing = () => {
   const { currentUser } = useSelector(state => state.user)
   const [files, setFiles] = useState([]);
   const navigate = useNavigate();
+  const params = useParams();
   const [formData, setFormData] = useState({
     imageUrls: [],
     name: "",
@@ -21,10 +22,27 @@ const CreateListing = () => {
     furnished: false,
   });
 
+
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchListing = async () => {
+      const listingId = params.listingId;
+      const res = await fetch(`/api/listing/get/${listingId}`);
+      const data = await res.json();
+      if(data.success === false){
+        console.log(error.message);
+        return;
+      }
+      setFormData(data);
+    };
+
+    fetchListing();
+  }, []); 
+
 
   const storeImage = async (image) => {
     // this promise will return the url from cloudinary 
@@ -131,7 +149,7 @@ const CreateListing = () => {
       setLoading(true);
       setError(false);
 
-      const res = await fetch('/api/listing/create',
+      const res = await fetch(`/api/listing/update/${params.listingId}`,
         {
           method: 'POST',
           headers: {
@@ -148,8 +166,7 @@ const CreateListing = () => {
       if (data.success === false) {
         return setError(data.message);
       }
-
-      alert("List Created Succesfully");
+      alert("Update Succesfully");
       navigate(`/listing/${data._id}`);
     } catch (error) {
       setError(error.message);
@@ -161,7 +178,7 @@ const CreateListing = () => {
   return (
     <main className="p-3 max-w-5xl mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">
-        Create Listing
+        Update Listing
       </h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
@@ -372,7 +389,7 @@ const CreateListing = () => {
             className="p-3 bg-slate-700 text-white rounded-lg 
                         uppercase hover:opacity-95 disabled:opacity-80"
           >
-            {loading ? "Creating..." : "Create Listing"}
+            {loading ? "Updating..." : "Update Listing"}
           </button>
           {error && <p className="text-red-700 text-sm">{error}</p>}
         </div>
