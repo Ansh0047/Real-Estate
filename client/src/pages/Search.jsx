@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import ListingItem from "../component/ListingItem";
 
 export default function Search() {
     const [sidebardata, setSidebardata] = useState({
@@ -14,10 +15,10 @@ export default function Search() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [listings, setListings] = useState([]);
-    const [showMore,setShowMore] = useState(false);
+    const [showMore, setShowMore] = useState(false);
 
     console.log(listings);
-    
+
     // console.log(sidebardata);
 
     useEffect(() => {
@@ -30,16 +31,16 @@ export default function Search() {
         const sortFromUrl = urlParams.get('sort');
         const orderFromUrl = urlParams.get('order');
 
-        if(searchTermFromUrl || typeFromUrl || parkingFromUrl || furnishedFromUrl || offerFromUrl || sortFromUrl || orderFromUrl){
-        setSidebardata({
-            searchTerm: searchTermFromUrl || '',
-            type: typeFromUrl || 'all',
-            parking: parkingFromUrl === 'true' ? true : false,
-            furnished: furnishedFromUrl === 'true' ? true : false,
-            offer: offerFromUrl === 'true' ? true : false,
-            sort: sortFromUrl || 'created_at',
-            order: orderFromUrl || 'desc',
-        });
+        if (searchTermFromUrl || typeFromUrl || parkingFromUrl || furnishedFromUrl || offerFromUrl || sortFromUrl || orderFromUrl) {
+            setSidebardata({
+                searchTerm: searchTermFromUrl || '',
+                type: typeFromUrl || 'all',
+                parking: parkingFromUrl === 'true' ? true : false,
+                furnished: furnishedFromUrl === 'true' ? true : false,
+                offer: offerFromUrl === 'true' ? true : false,
+                sort: sortFromUrl || 'created_at',
+                order: orderFromUrl || 'desc',
+            });
         }
 
         const fetchListings = async () => {
@@ -62,16 +63,16 @@ export default function Search() {
 
     // if there is a change in the search bar, then update to ui as well
     const handleChange = (event) => {
-        if(event.target.id === 'all' || event.target.id === 'rent' || event.target.id === 'sale') {
+        if (event.target.id === 'all' || event.target.id === 'rent' || event.target.id === 'sale') {
             setSidebardata({ ...sidebardata, type: event.target.id });
         }
-        if(event.target.id === 'searchTerm') {
+        if (event.target.id === 'searchTerm') {
             setSidebardata({ ...sidebardata, searchTerm: event.target.value });
         }
-        if(event.target.id === 'parking' || event.target.id === 'furnished' || event.target.id === 'offer'){
-            setSidebardata({...sidebardata, [event.target.id]:event.target.checked || event.target.checked === 'true' ? true : false,});
+        if (event.target.id === 'parking' || event.target.id === 'furnished' || event.target.id === 'offer') {
+            setSidebardata({ ...sidebardata, [event.target.id]: event.target.checked || event.target.checked === 'true' ? true : false, });
         }
-        if(event.target.id === 'sort_order') {
+        if (event.target.id === 'sort_order') {
             const sort = event.target.value.split('_')[0] || 'created_at';
             const order = event.target.value.split('_')[1] || 'desc';
             setSidebardata({ ...sidebardata, sort, order });
@@ -197,7 +198,29 @@ export default function Search() {
             <div className='flex-1'>
                 <h1 className='text-3xl font-semibold border-b p-3 text-slate-700 mt-5'>Listing results:</h1>
                 <div className='p-7 flex flex-wrap gap-4'>
+                    {!loading && listings.length === 0 && (
+                        <p className='text-xl text-slate-700'>No listing found!</p>
+                    )}
+                    {loading && (
+                        <p className='text-xl text-slate-700 text-center w-full'>
+                            Loading...
+                        </p>
+                    )}
 
+                    {!loading &&
+                        listings &&
+                        listings.map((listing) => (
+                            <ListingItem key={listing._id} listing={listing} />
+                        ))}
+
+                    {showMore && (
+                        <button
+                            onClick={onShowMoreClick}
+                            className='text-green-700 hover:underline p-7 text-center w-full'
+                        >
+                            Show more
+                        </button>
+                    )}
                 </div>
             </div>
         </div>
