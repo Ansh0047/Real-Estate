@@ -30,26 +30,22 @@ const CreateListing = () => {
     // this promise will return the url from cloudinary 
     return new Promise(async (resolve, reject) => {
       const formData = new FormData();
-
+  
       formData.append("file", image);
-      formData.append("upload_preset", "real_estate");
-      formData.append("cloud_name", "dpqw0munc");
-
+      formData.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
+      formData.append("cloud_name", process.env.REACT_APP_CLOUD_NAME);
+  
       try {
-        const response = await fetch(
-          "https://api.cloudinary.com/v1_1/dpqw0munc/image/upload",
-          {
-            method: "POST",
-            body: formData,
-          }
-        );
-
+        const response = await fetch(process.env.REACT_APP_CLOUDINARY_URL, {
+          method: "POST",
+          body: formData,
+        });
+  
         const data = await response.json();
         resolve(data.secure_url);
       } catch (error) {
         reject(error);
       }
-
     });
   };
 
