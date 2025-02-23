@@ -140,7 +140,7 @@ function Profile() {
         />
         <img
           // onClick={() => fileRef.current.click()}
-          src={formData.avatar || currentUser.avatar}
+          src={formData.avatar || currentUser.avatar || "https://png.pngtree.com/png-vector/20191113/ourmid/pngtree-avatar-human-man-people-person-profile-user-abstract-circl-png-image_1983926.jpg"}
           alt="profile"
           className="rounded-full h-24 w-24 object-cover cursor-pointer
         self-center mt-2"

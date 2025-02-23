@@ -9,6 +9,9 @@ export default function Header() {
     const [searchTerm ,setSearchTerm] = useState('');
     const navigate = useNavigate();
 
+    console.log(currentUser.avatar);
+    
+
     const handleSubmit = (e)=>{
         e.preventDefault();
         const urlParams = new URLSearchParams(window.location.search);
@@ -55,7 +58,7 @@ export default function Header() {
                         {
                             currentUser?
                             <img className='rounded-full h-7 w-7 object-cover'
-                            src={currentUser.avatar}
+                            src={currentUser.avatar || "https://png.pngtree.com/png-vector/20191113/ourmid/pngtree-avatar-human-man-people-person-profile-user-abstract-circl-png-image_1983926.jpg"}
                             alt="profile"
                             /> :
                             <li className=' text-slate-700 hover:underline'>Sign in</li>
