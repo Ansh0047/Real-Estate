@@ -9,7 +9,7 @@ export default function Header() {
     const [searchTerm ,setSearchTerm] = useState('');
     const navigate = useNavigate();
 
-    console.log(currentUser.avatar);
+    // console.log(currentUser.avatar);
     
 
     const handleSubmit = (e)=>{
