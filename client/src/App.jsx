@@ -7,7 +7,7 @@ import Profile from "./pages/Profile";
 import Header from "./component/Header";
 import PrivateRoute from "./component/PrivateRoute";
 import CreateListing from "./pages/CreateListing";
-import UpdateListing from "./pages/updateListing";
+import UpdateListing from "./pages/UpdateListing";
 import Listing from "./pages/Listing";
 import Search from "./pages/Search";
 
