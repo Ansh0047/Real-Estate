@@ -23,11 +23,11 @@ mongoose
     });
 
 // instead of making all the routes here we will create another file for that and import them here
-// app.get('/', (req,res) => {
-//     res.json({
-//         message: "Hi, AK!",
-//     });
-// });
+app.get('/', (req,res) => {
+    res.json({
+        message: "Hi, AK!",
+    });
+});
 
 const __dirname = path.resolve();
 
