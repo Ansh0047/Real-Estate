@@ -6,13 +6,15 @@ import authRouter from "./routes/auth.route.js";
 import listingRouter from "./routes/listing.route.js";
 import cookieParser from "cookie-parser";
 import path from "path";
-dotenv.config();
+dotenv.config({ path: "./api/.env" });
 
 const app = express();
 app.use(express.json()); // to allow the json to the server as input
 app.use(cookieParser());
+
+const uri = process.env.MONGO_URI;
 mongoose
-    .connect(process.env.MONGO)
+    .connect(uri)
     .then(() => {
         console.log("Connected to MongoDB succesfully");
     })
@@ -29,8 +31,8 @@ mongoose
 
 const __dirname = path.resolve();
 
-app.listen(3000, () => {
-    console.log("Server running on port 3000");
+app.listen(process.env.PORT, () => {
+    console.log(`Server running on port ${process.env.PORT}`);
 });
 
 app.use("/api/user", userRouter);
