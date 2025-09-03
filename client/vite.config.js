@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
     server: {
       proxy: {
         '/api': {
-          target: env.VITE_API_URL, // use value from .env
+          target: "https://real-estate-7got.onrender.com",
           changeOrigin: true,
           secure: false,
         },
