@@ -82,7 +82,7 @@ const CreateListing = () => {
         promises.push(storeImage(files[i]));
       }
 
-      console.log(promises);
+      // console.log(promises);
 
 
       Promise.all(promises)

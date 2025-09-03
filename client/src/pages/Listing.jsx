@@ -37,7 +37,7 @@ const Listing = () => {
                     setLoading(false);
                     return;
                 }
-                console.log(data);
+                // console.log(data);
 
                 setListing(data);
                 setLoading(false);

@@ -13,6 +13,7 @@ app.use(express.json()); // to allow the json to the server as input
 app.use(cookieParser());
 
 const uri = process.env.MONGO_URI;
+
 mongoose
     .connect(uri)
     .then(() => {

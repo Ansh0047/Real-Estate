@@ -17,7 +17,7 @@ export default function Search() {
     const [listings, setListings] = useState([]);
     const [showMore, setShowMore] = useState(false);
 
-    console.log(listings);
+    // console.log(listings);
 
     // console.log(sidebardata);
 

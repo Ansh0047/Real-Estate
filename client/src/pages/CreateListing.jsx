@@ -32,11 +32,11 @@ const CreateListing = () => {
       const formData = new FormData();
   
       formData.append("file", image);
-      formData.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
-      formData.append("cloud_name", process.env.REACT_APP_CLOUD_NAME);
+      formData.append("upload_preset", import.meta.env.VITE_UPLOAD_PRESET);
+      formData.append("cloud_name", import.meta.env.VITE_CLOUD_NAME);
   
       try {
-        const response = await fetch(process.env.REACT_APP_CLOUDINARY_URL, {
+        const response = await fetch(import.meta.env.VITE_CLOUDINARY_URL, {
           method: "POST",
           body: formData,
         });
@@ -60,7 +60,7 @@ const CreateListing = () => {
         promises.push(storeImage(files[i]));
       }
 
-      console.log(promises);
+      // console.log(promises);
 
 
       Promise.all(promises)
