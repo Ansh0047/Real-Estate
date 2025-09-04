@@ -7,6 +7,8 @@ function SignUp() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const url = import.meta.env.VITE_API_URL;
+
   const handleChange = (event) => {
     setFormData({
       ...formData,
@@ -22,7 +24,7 @@ function SignUp() {
     event.preventDefault();      // to avoid the refresh of the page when form is submitted
     try {
       setLoading(true);
-      const res = await fetch('/api/auth/signup', {
+      const res = await fetch(`${url}/api/auth/signup`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',

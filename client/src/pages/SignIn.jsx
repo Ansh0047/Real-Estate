@@ -16,6 +16,8 @@ function SignIn() {
   
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const url = import.meta.env.VITE_API_URL;
   const handleChange = (event) => {
     setFormData({
       ...formData,
@@ -32,7 +34,7 @@ function SignIn() {
     try {
       // setLoading(true);
       dispatch(signInStart());
-      const res = await fetch('/api/auth/signin', {
+      const res = await fetch(`${url}/api/auth/signin`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',

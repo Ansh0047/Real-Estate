@@ -22,6 +22,7 @@ const CreateListing = () => {
     furnished: false,
   });
 
+  const url = import.meta.env.VITE_API_URL;
 
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -31,7 +32,7 @@ const CreateListing = () => {
   useEffect(() => {
     const fetchListing = async () => {
       const listingId = params.listingId;
-      const res = await fetch(`/api/listing/get/${listingId}`);
+      const res = await fetch(`${url}/api/listing/get/${listingId}`);
       const data = await res.json();
       if(data.success === false){
         console.log(error.message);
@@ -149,7 +150,7 @@ const CreateListing = () => {
       setLoading(true);
       setError(false);
 
-      const res = await fetch(`/api/listing/update/${params.listingId}`,
+      const res = await fetch(`${url}/api/listing/update/${params.listingId}`,
         {
           method: 'POST',
           headers: {

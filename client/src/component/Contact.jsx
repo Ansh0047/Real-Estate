@@ -8,10 +8,11 @@ export default function Contact({ listing }) {
         setMessage(e.target.value);
     };
 
+    const url = import.meta.env.VITE_API_URL;
     useEffect(() => {
         const fetchLandlord = async () => {
         try {
-            const res = await fetch(`/api/user/${listing.userRef}`);
+            const res = await fetch(`${url}/api/user/${listing.userRef}`);
             const data = await res.json();
             if(data.success === false){
                 return ;

@@ -6,15 +6,15 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
 
   return {
-    server: {
-      proxy: {
-        '/api': {
-          target: "https://real-estate-6kjl.onrender.com/",
-          changeOrigin: true,
-          secure: false,
-        },
-      },
-    },
+    // server: {
+    //   proxy: {
+    //     '/api': {
+    //       target: "https://real-estate-6kjl.onrender.com/",
+    //       changeOrigin: true,
+    //       secure: false,
+    //     },
+    //   },
+    // },
     plugins: [react()],
   }
 })

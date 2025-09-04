@@ -6,11 +6,18 @@ import authRouter from "./routes/auth.route.js";
 import listingRouter from "./routes/listing.route.js";
 import cookieParser from "cookie-parser";
 import path from "path";
+import cors from "cors";
 dotenv.config();
 
 const app = express();
 app.use(express.json()); // to allow the json to the server as input
 app.use(cookieParser());
+app.use(cors({
+  origin: [process.env.FRONT_END_URL,"http://localhost:5173"], // your frontend origin
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
 
 const uri = process.env.MONGO_URI;
 

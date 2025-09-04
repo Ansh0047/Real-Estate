@@ -10,14 +10,14 @@ export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
-
+  const url = import.meta.env.VITE_API_URL;
   SwiperCore.use([Navigation]);
   // console.log(offerListings);
 
   useEffect(() => {
     const fetchOfferListings = async () => {
       try {
-        const res = await fetch('/api/listing/get?offer=true&limit=6');
+        const res = await fetch(`${url}/api/listing/get?offer=true&limit=6`);
         const data = await res.json();
         setOfferListings(data);
         fetchRentListings();  // this function is called here so as to get the data one by one same for all 
@@ -28,7 +28,7 @@ export default function Home() {
 
     const fetchRentListings = async () => {
       try {
-        const res = await fetch('/api/listing/get?type=rent&limit=6');
+        const res = await fetch(`${url}/api/listing/get?type=rent&limit=6`);
         const data = await res.json();
         setRentListings(data);
         fetchSaleListings();
@@ -40,7 +40,7 @@ export default function Home() {
 
     const fetchSaleListings = async () => {
       try {
-        const res = await fetch('/api/listing/get?type=sale&limit=6');
+        const res = await fetch(`${url}/api/listing/get?type=sale&limit=6`);
         const data = await res.json();
         setSaleListings(data);
 

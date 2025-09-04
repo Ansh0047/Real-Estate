@@ -127,7 +127,8 @@ const CreateListing = () => {
       setLoading(true);
       setError(false);
 
-      const res = await fetch('/api/listing/create',
+      const url = import.meta.env.VITE_API_URL;
+      const res = await fetch(`${url}/api/listing/create`,
         {
           method: 'POST',
           headers: {
