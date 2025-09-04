@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
     server: {
       proxy: {
         '/api': {
-          target: "http://localhost:3000",
+          target: "https://real-estate-6kjl.onrender.com/",
           changeOrigin: true,
           secure: false,
         },
