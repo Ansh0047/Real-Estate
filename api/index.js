@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json()); // to allow the json to the server as input
 app.use(cookieParser());
 app.use(cors({
-  origin: ["https://real-estate-delta-woad.vercel.app","http://localhost:5173"], // your frontend origin
+  origin: ["https://myreal-estate-ak.vercel.app","http://localhost:5173"], // your frontend origin
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
